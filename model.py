@@ -72,7 +72,7 @@ def generator(samples, batch_size = 32):
             y_train = np.array(angles)
             yield shuffle(X_train, y_train)
 # Set our batch size
-batch_size=128
+batch_size=32
 
 # compile and train the model using the generator function
 train_generator = generator(train_samples, batch_size=batch_size)
@@ -103,7 +103,7 @@ model.add(Dense(1))
 #                                 save_best_only=args.save_best_only,
 #                                 mode='auto')
 model.compile(loss='mse', optimizer='adam')
-history_object=model.fit_generator(train_generator, \
+model.fit_generator(train_generator, \
             steps_per_epoch=math.ceil(len(train_samples) * 4/batch_size), \
             validation_data=validation_generator, \
             validation_steps=math.ceil(len(validation_samples) * 4/batch_size), \
